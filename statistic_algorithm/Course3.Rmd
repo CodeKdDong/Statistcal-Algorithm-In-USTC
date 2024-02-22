@@ -1,0 +1,32 @@
+---
+title: "R Statistic Algorithm Course3"
+author:
+  - 姓名：王凯栋
+  - 学号：PB20071441
+  - 日期：2023/3/21
+documentclass: ctexart
+keywords:
+  - 中文
+  - R Markdown
+output:
+  rticles::ctex:
+    fig_caption: yes
+    number_sections: no
+    toc: yes
+---
+
+
+
+考虑$E(g(X))$的Monte Carlo估计量$\hat{\theta}=\frac{1}{n}\sum_{i=1}^{n}g(X_i)$,我们希望在Monte Carelo中生成X_1,X_2\sim X且g(X_1)和g(X_2)具有负相关性，从而降低平均值$\frac{g(X_1)+g(X_2)}{2}$的方差
+
+
+
+为了生成具有负相关性的样本，我们可以使用反序列抽样方法（Antithetic Sampling）。该方法的思想是生成成对的样本$(X_1,X_2)$，其中$X_1$和$X_2$是对称的，即它们的分布相同，但取值方向相反。这意味着如果$X_1$很大，那么$X_2$通常很小，反之亦然。
+
+具体来说，如果我们有一个生成服从分布$X$的随机变量的随机数生成器，我们可以使用该生成器来生成成对的样本$(X_1,X_2)$，其中$X_1$和$X_2$都是从分布$X$中独立抽取的。然后，我们可以使用如下公式计算估计量$\hat{\theta}$：
+
+$θ^=12n∑i=1n(g(Xi,1)+g(Xi,2))θ^=2n1​∑i=1n​(g(Xi,1​)+g(Xi,2​))$
+
+其中$X_{i,1}$和$X_{i,2}$是第$i$对样本$(X_{i,1},X_{i,2})$中的两个样本。
+
+使用这种方法，我们可以确保$g(X_{i,1})$和$g(X_{i,2})$具有负相关性，因为如果$X_{i,1}$很大，则$X_{i,2}$通常很小，反之亦然。这可以降低估计量的方差，从而提高估计量的准确性。
